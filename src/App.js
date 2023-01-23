@@ -27,7 +27,6 @@ class App extends Component {
         <button
           className="Button"
           onClick={() => {this.setState(prevState => {
-            console.log(prevState.showBlock);
             return {showBlock: !prevState.showBlock};
           })}}
         >
@@ -39,6 +38,12 @@ class App extends Component {
           timeout={1000}
           mountOnEnter
           unmountOnExit
+          onEnter={() => console.log('onEnter')}
+          onEntering={() => console.log('onEntering')}
+          onEntered={() => console.log('onEntered')}
+          onExit={() => console.log('onExit')}
+          onExiting={() => console.log('onExiting')}
+          onExited={() => console.log('onExited')}
         >
           {state => (
             <div 
@@ -53,13 +58,11 @@ class App extends Component {
             />
           )}
         </Transition>
-        {
-          this.state.modalIsOpen ?
-          <Modal closed={ this.closeModal } show={this.state.modalIsOpen} /> :
-          null
-        }
+         { /* {state => ( */ }
+        <Modal closed={ this.closeModal } show={this.state.modalIsOpen} />  
+         { /* )} */ }
         { this.state.modalIsOpen ?
-          <Backdrop show={this.state.modalIsOpen} /> :
+          <Backdrop show /> :
           null
         }
         <button className="Button" onClick={ this.showModal }>
